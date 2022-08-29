@@ -10,7 +10,7 @@ def vect_gmv(arr):
     Parameters
     ----------
     arr : numpy array
-        Array with varibales.
+        Array with varibales. Elements of array: [0] - sku, [1] - gmv, [2] - price, [3] - stock.
 
     Returns
     -------
