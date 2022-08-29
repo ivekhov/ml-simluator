@@ -1,0 +1,17 @@
+
+# new line 
+pyment -f false example.py
+
+# format output
+pyment -o numpydoc example.py
+
+# quotes - here is ordinary quotes
+pyment -q "'''" example.py
+
+
+pyment -f false  -o numpydoc  hyperparam_space.py
+patch -p1 < hyperparam_space.py.patch
+
+
+pyment -q """""  hyperparam_space.py
+patch -p1 < hyperparam_space.py.patch
