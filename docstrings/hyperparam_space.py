@@ -75,14 +75,14 @@ def fix_params(params, space):
     Parameters
     ----------
     params : dict
-        Model parameters.
+        Parameters
     space : dict
-        Space of parameters value.
+        Boundaries
 
     Returns
     -------
     dict
-        Fixed params
+        Normalized parameters
 
     """
     params = dict(params)
@@ -143,7 +143,7 @@ def ranking(ser):
 
 def qround(x, a, b, q):
     """
-    Convert x to one of [a, a+q, a+2q, .., b].
+    Convert x to one of [a, a+q, a+2q, .., b]
 
     Parameters
     ----------
