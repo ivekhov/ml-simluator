@@ -1,6 +1,6 @@
 *.pdf
 *.code-workspace
-*.csv
+# *.csv
 .DS_Store
 
 # Byte-compiled / optimized / DLL files
