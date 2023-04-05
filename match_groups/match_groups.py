@@ -47,12 +47,19 @@ def extend_matches(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
 	while len(items) != 0:
 		pair = items.pop()
 		for item in items:
+			if pair == item:
+				result.add(pair)
+				continue
 			if len(set(pair).intersection(set(item))) == 1:
 				result.add(tuple(pair))
 				result.add(tuple(item))
 				result.add(tuple(set(pair).union(set(item)).difference(set(pair).intersection(set(item)))))
-			if pair == item:
-				result.add(pair)
+			
+			# for match in result:
+			# 	if len(set(pair).intersection(set(match))) == 1:
+			# 		result.add(tuple(pair))
+			# 		result.add(tuple(match))
+			# 		result.add(tuple(set(pair).union(set(match)).difference(set(pair).intersection(set(match)))))
 
 	unique_pairs = list(tuple(set(pairs).difference(set(result))))
 	for pair in unique_pairs:
