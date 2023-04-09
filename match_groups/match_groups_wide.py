@@ -1,5 +1,4 @@
 from collections import defaultdict
-from itertools import permutations
 from typing import List
 from typing import Tuple
 
@@ -30,6 +29,9 @@ def extend_matches(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
         temp_union = set()
         for item in items:
             temp_union |= storage[item]
+            for group in combinations.copy():
+                if set(group) <= temp_union:
+                    combinations.remove(group)
             combinations.add(tuple(sorted(temp_union)))
 
     return sorted(list(combinations))
