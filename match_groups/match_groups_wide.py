@@ -1,3 +1,4 @@
+from collections import defaultdict
 from itertools import permutations
 from typing import List
 from typing import Tuple
@@ -5,71 +6,32 @@ from typing import Tuple
 
 test_data = [
     [
-        [(1, 2), (7, 2)],
-        [(1, 2), (1, 7), (2, 7)]
+        [(5, 3, 4, 8), (1, 2), (7, 2)],
+        [(1, 2, 7), (3, 4, 5, 8)]
     ],
-    [
-        [],
-        []
-    ],
-    [
-        [(1, 4), (2, 3)],
-        [(1, 4), (2, 3)]
-    ],
-    [
-        [(2, 3), (1, 4)],
-        [(1, 4), (2, 3)]
-    ],
-
-    [
-        [(1, 2), (1, 2)],
-        [(1, 2)]
-    ],
-    [
-        [(1, 2), (2, 3), (5, 3), (4, 6), (6, 7), (8, 9), (1, 3), (2, 5), (4, 7)],
-        [(1, 2), (1, 3), (1, 5), (2, 3), (2, 5), (3, 5), (4, 6), (4, 7), (6, 7), (8, 9)]
-    ],
-    [
-        [(1, 2), (2, 3), (3, 4)],
-        [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
-    ],
-    [
-        [(1, 2), (2, 3), (5, 3), (4, 6), (6, 7), (8, 9)],
-        [(1, 2), (1, 3), (1, 5), (2, 3), (2, 5), (3, 5), (4, 6), (4, 7), (6, 7), (8, 9)]
-    ]
 ]
 
 
+def init_dict():
+    return set()
+
+
 def extend_matches(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
-    storage = {}
+    storage = defaultdict(init_dict)
+    unique_nums = set()
     for pair in pairs:
-        first = list(pair)[0]
-        second = list(pair)[1]
-
-        if first not in storage.keys():
-            storage[first] = set()
-            storage[first].add(first)
-            storage[first].add(second)
-        else:
-            storage[first].add(first)
-            storage[first].add(second)
-
-        if second not in storage.keys():
-            storage[second] = set()
-            storage[second].add(first)
-            storage[second].add(second)
-        else:
-            storage[second].add(first)
-            storage[second].add(second)
+        unique_nums |= set(pair)
+    for pair in pairs:
+        for num in pair:
+            storage[num] |= set(pair)
 
     combinations = set()
     for items in storage.values():
         temp_union = set()
         for item in items:
-            # temp_union = temp_union.union(storage[item]) or shorter:
             temp_union |= storage[item]
-            for pair in permutations(temp_union, 2):
-                combinations.add(tuple(sorted(pair)))
+            combinations.add(tuple(sorted(temp_union)))
+
     return sorted(list(combinations))
 
 
