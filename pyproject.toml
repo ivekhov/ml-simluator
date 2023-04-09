@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ml_karpov"
+name = "ml_simulator"
 version = "0.1.0"
 description = ""
 authors = ["ivekhov <ivekhov@gmail.com>"]
